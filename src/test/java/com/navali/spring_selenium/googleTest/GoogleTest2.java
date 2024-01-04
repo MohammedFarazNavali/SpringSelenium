@@ -1,5 +1,6 @@
 package com.navali.spring_selenium.googleTest;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import com.navali.spring_selenium.SpringBaseTestNGTest;
 import com.navali.spring_selenium.page.google.GooglePage;
 import com.navali.spring_selenium.utils.ScreenShots;
@@ -9,8 +10,9 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
-public class GoogleTest extends SpringBaseTestNGTest {
+public class GoogleTest2 extends SpringBaseTestNGTest {
 
     @Autowired
     private GooglePage googlePage;
@@ -23,7 +25,7 @@ public class GoogleTest extends SpringBaseTestNGTest {
     public void googleTest() throws IOException {
         this.googlePage.goTo();
         Assert.assertTrue(this.googlePage.isAt());
-        this.googlePage.getSearchComponent().search("spring boot");
+        this.googlePage.getSearchComponent().search("Spring Boot ");
         Assert.assertTrue(this.googlePage.getSearchResults().isAt());
         Assert.assertTrue(this.googlePage.getSearchResults().getCount() > 2);
         this.screenShots.takeScreenShots();

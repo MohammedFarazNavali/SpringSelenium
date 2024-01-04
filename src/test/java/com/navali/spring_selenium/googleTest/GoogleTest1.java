@@ -1,0 +1,35 @@
+package com.navali.spring_selenium.googleTest;
+
+import com.google.common.util.concurrent.Uninterruptibles;
+import com.navali.spring_selenium.SpringBaseTestNGTest;
+import com.navali.spring_selenium.page.google.GooglePage;
+import com.navali.spring_selenium.utils.ScreenShots;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+public class GoogleTest1 extends SpringBaseTestNGTest {
+
+    @Autowired
+    private GooglePage googlePage;
+
+    @Lazy
+    @Autowired
+    private ScreenShots screenShots;
+
+    @Test
+    public void googleTest() throws IOException {
+        this.googlePage.goTo();
+        Assert.assertTrue(this.googlePage.isAt());
+        this.googlePage.getSearchComponent().search("Environment ");
+        Assert.assertTrue(this.googlePage.getSearchResults().isAt());
+        Assert.assertTrue(this.googlePage.getSearchResults().getCount() > 2);
+        this.screenShots.takeScreenShots();
+        this.googlePage.close();
+    }
+
+}
